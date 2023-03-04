@@ -33,7 +33,7 @@ if nav == "Home":
   
     
     # Plotting the different clusters visualizaton
-    df1=pd.read_csv('cleaned_data.csv')
+    
     st.set_option('deprecation.showPyplotGlobalUse', False)
 
     # Scale the data
