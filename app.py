@@ -50,36 +50,62 @@ if nav == "Home":
     klabels=kmeans.fit_predict(scaled_features)
    
        
-    st.subheader('Distribution of clusters')
-    plt.figure(figsize=(8,8))
-    plt.scatter(scaled_features[klabels==0,0],scaled_features[klabels==0,1],s=50,color='green',label='cluster 0')
-    plt.scatter(scaled_features[klabels==1,0],scaled_features[klabels==1,1],s=50,color='yellow',label='cluster 1')
-    plt.scatter(scaled_features[klabels==2,0],scaled_features[klabels==2,1],s=50,color='blue',label='cluster 2')
-    plt.scatter(scaled_features[klabels==3,0],scaled_features[klabels==3,1],s=50,color='red',label='cluster 3')
-    plt.scatter(scaled_features[klabels==4,0],scaled_features[klabels==4,1],s=50,color='violet',label='cluster 4')
+   # Creating a figure and axis
+    fig, ax = plt.subplots(figsize=(8, 8))
 
-    #visualizing the centroids
-    plt.scatter(kmeans.cluster_centers_[:,0],kmeans.cluster_centers_[:,1],s=100,c='black',label='Centroids')
-    plt.title('Customer groups')
-    plt.xlabel('Annualincome')
-    plt.ylabel('SpendingScore')
-    plt.legend()
-    st.pyplot()
-    # plotting the cluster bar graph in streamlit
-    count=df['Cluster'].value_counts()
-    x=count.index
-    y=count.values
-    # plotting the bar graph
-    plt.figure(figsize=(10,5))
-    plt.bar(x,y)
-    plt.title('Distribution of clusters',fontsize=16)
-    plt.xlabel('Clusters')
-    plt.ylabel('Distribution count')
-    # display plot in Streamlit app
-    st.pyplot()
-    st.write("We can that our data mainly consists of middle income earners followed closely by  high spenders with high income \n"
-             "Customers who have low income and high spending habits are few compared to the rest")
-    
+    # Plotting the clusters
+    ax.scatter(scaled_features[klabels==0, 0], scaled_features[klabels==0, 1], s=50, color='green', label='cluster 0')
+    ax.scatter(scaled_features[klabels==1, 0], scaled_features[klabels==1, 1], s=50, color='yellow', label='cluster 1')
+    ax.scatter(scaled_features[klabels==2, 0], scaled_features[klabels==2, 1], s=50, color='blue', label='cluster 2')
+    ax.scatter(scaled_features[klabels==3, 0], scaled_features[klabels==3, 1], s=50, color='red', label='cluster 3')
+    ax.scatter(scaled_features[klabels==4, 0], scaled_features[klabels==4, 1], s=50, color='violet', label='cluster 4')
+
+    # Visualizing the centroids
+    ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=100, c='black', label='Centroids')
+
+    # Adding title and labels
+    ax.set_title('Customer groups')
+    ax.set_xlabel('Annual Income')
+    ax.set_ylabel('Spending Score')
+    ax.legend()
+
+    # Passing the figure to Streamlit
+    st.subheader('Distribution of clusters')
+    st.pyplot(fig)
+
+    # Count the number of instances in each cluster
+    count = df['Cluster'].value_counts()
+
+    x = count.index
+
+    y = count.values
+
+
+    # Create a figure and axis for the bar plot
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+
+
+    # Plot the bar graph
+
+    ax.bar(x, y)
+
+    ax.set_title('Distribution of clusters', fontsize=16)
+
+    ax.set_xlabel('Clusters')
+
+
+    ax.set_ylabel('Distribution count')
+
+
+    # Display the plot in the Streamlit app
+
+    st.pyplot(fig)
+
+
+    st.write("We can see that our data mainly consists of middle-income earners, followed closely by high spenders with high income. "
+
+         "Customers who have low income and high spending habits are few compared to the rest.")
     
  ## Creating and Modifying our classifier   
 else :
