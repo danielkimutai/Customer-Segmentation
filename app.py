@@ -8,9 +8,9 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler 
 import joblib
 # Load the pre-trained model
-filename = '/home/dan/projects/uber_data_project/Customer-Segmentation/dt_model.sav'
+filename = 'dt_model.sav'
 loaded_model=pickle.load(open(filename,'rb'))
-df=pd.read_csv('/home/dan/projects/uber_data_project/Customer-Segmentation/Cluster_data.csv')
+df=pd.read_csv('Cluster_data.csv')
 
 
 
